@@ -44,6 +44,11 @@ export const routes = [{
         path: '/users/edit/:id',
         component: EditUser
     },
+    {
+        name: 'updateuser',
+        path: '/users/update/:id',
+        component: EditUser
+    },
 ];
 
 const router = createRouter({

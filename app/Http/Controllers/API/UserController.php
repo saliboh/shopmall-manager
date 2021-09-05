@@ -11,6 +11,56 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
+
+    public function index()
+    {
+        $users = User::all()->toArray();
+        return array_reverse($users);
+    }
+
+    public function edit($id)
+    {
+        $user = User::find($id);
+        $user->password = '';
+        return response()->json($user);
+    }
+
+    public function update($id, Request $request)
+    {
+        try {
+            $user =  User::find($id);
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->role = $request->role;
+
+            if($request->password != '') {
+                $user->password = Hash::make($request->password);
+            }
+
+            $user->save();
+
+            $success = true;
+            $message = 'The user is successfully updated';
+        } catch (\Illuminate\Database\QueryException $ex) {
+            $success = false;
+            $message = $ex->getMessage();
+        }
+
+        $response = [
+            'success' => $success,
+            'message' => $message,
+        ];
+        return response()->json($response);
+    }
+
+    public function delete($id)
+    {
+        $book = User::find($id);
+        $book->delete();
+
+        return response()->json('The book successfully deleted');
+    }
+
     /**
      * Register
      */
@@ -20,6 +70,7 @@ class UserController extends Controller
             $user = new User();
             $user->name = $request->name;
             $user->email = $request->email;
+            $user->role = $request->role;
             $user->password = Hash::make($request->password);
             $user->save();
 

@@ -6,21 +6,21 @@
                 <form @submit.prevent="addUser">
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" class="form-control" v-model="user.name">
+                        <input type="text" class="form-control"  v-model="user.name">
                     </div>
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="text" class="form-control" v-model="user.author">
+                        <input type="text" class="form-control" v-model="user.email">
                     </div>
                     <div class="form-group">
                         <label>Password</label>
-                        <input type="password" class="form-control" v-model="user.author">
+                        <input type="password" class="form-control" v-model="user.password">
                     </div>
                     <div class="form-group">
                         <label>Roles</label>
                         <select class="form-control" v-model="user.role">
-                            <option value="SHOP_MANAGER">Shop Manager</option>
-                            <option value="STORE_OWNER">Store Owner</option>
+                            <option value="mall-manager">Mall Manager</option>
+                            <option value="store-owner">Store Owner</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Add User</button>
@@ -40,7 +40,7 @@ export default {
     methods: {
         addUser() {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.post('/api/users/add', this.book)
+                this.$axios.post('/api/users/add', this.user)
                     .then(response => {
                         this.$router.push({name: 'users'})
                     })
@@ -52,7 +52,7 @@ export default {
     },
     beforeRouteEnter(to, from, next) {
         if (!window.Laravel.isLoggedin) {
-            window.location.href = "/";
+            window.location.href = "/login";
         }
         next();
     }

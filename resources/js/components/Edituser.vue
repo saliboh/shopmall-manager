@@ -1,9 +1,9 @@
 <template>
     <div>
-        <h4 class="text-center">Edit User</h4>
+        <h4 class="text-center">Edit Users</h4>
         <div class="row">
             <div class="col-md-6">
-                <form @submit.prevent="updateUser">
+                <form @submit.prevent="updateUser" >
                     <div class="form-group">
                         <label>Name</label>
                         <input type="text" class="form-control" v-model="user.name">
@@ -14,13 +14,13 @@
                     </div>
                     <div class="form-group">
                         <label>Password</label>
-                        <input type="password" class="form-control" v-model="user.Password">
+                        <input type="password" style="display:none" class="form-control" v-model="user.password">
                     </div>
                     <div class="form-group">
                         <label>Role</label>
                         <select class="form-control" v-model="user.role">
-                            <option value="SHOP_MANAGER">Shop Manager</option>
-                            <option value="STORE_OWNER">Store Owner</option>
+                            <option value="shop-manager">Shop Manager</option>
+                            <option value="store-owner">Store Owner</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Update User</button>
@@ -53,7 +53,7 @@ export default {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.post(`/api/users/update/${this.$route.params.id}`, this.user)
                     .then(response => {
-                        this.$router.push({name: 'books'});
+                        this.$router.push({name: 'users'});
                     })
                     .catch(function (error) {
                         console.error(error);
