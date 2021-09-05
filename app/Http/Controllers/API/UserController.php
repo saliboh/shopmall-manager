@@ -6,17 +6,25 @@ use Session;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use App\Services\UserService;
 
 class UserController extends Controller
 {
+    /**
+     * @var UserService $userService
+     */
+    private $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
     public function index()
     {
-        $users = User::query()
-            ->where('id', '!=', Auth::user()->id)
-            ->where('role', '!=', 'super-admin')
-            ->get()->toArray();
+        $users = $this->userService
+            ->getAllExceptUserHavingThisId(Auth::user()->id);
 
         return array_reverse($users);
     }
@@ -25,32 +33,27 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->password = '';
+
         return response()->json($user);
     }
 
     public function update($id, Request $request)
     {
         try {
-            $user =  User::find($id);
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->role = $request->role;
-            $user->password = Hash::make($request->password);
-            $user->save();
-
+            $user = $this->userService->updateUser($id, $request);
             $success = true;
             $message = 'The user is successfully updated';
         } catch (\Illuminate\Database\QueryException $ex) {
             $success = false;
             $message = $ex->getMessage();
+            $user = [];
         }
 
-        $response = [
+        return response()->json([
             'success' => $success,
             'message' => $message,
             'user' => $user,
-        ];
-        return response()->json($response);
+        ]);
     }
 
     public function delete($id)
@@ -67,12 +70,7 @@ class UserController extends Controller
     public function register(Request $request)
     {
         try {
-            $user = new User();
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->role = $request->role;
-            $user->password = Hash::make($request->password);
-            $user->save();
+            $this->userService->registerUser($request);
 
             $success = true;
             $message = 'User register successfully';
@@ -81,12 +79,10 @@ class UserController extends Controller
             $message = $ex->getMessage();
         }
 
-        // response
-        $response = [
+        return response()->json([
             'success' => $success,
             'message' => $message,
-        ];
-        return response()->json($response);
+        ]);
     }
 
     /**
