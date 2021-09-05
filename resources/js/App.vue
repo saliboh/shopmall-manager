@@ -15,9 +15,7 @@
                 <!-- for non-logged user-->
                 <div class="navbar-nav" v-else>
                     <router-link to="/" class="nav-item nav-link">Home</router-link>
-                    <router-link to="/login" class="nav-item nav-link">login</router-link>
-                    <router-link to="/register" class="nav-item nav-link">Register
-                    </router-link>
+                    <router-link to="/login" class="nav-item nav-link">Login</router-link>
                     <router-link to="/about" class="nav-item nav-link">About</router-link>
                 </div>
             </div>
