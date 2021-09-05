@@ -8,7 +8,7 @@
             <div class="collapse navbar-collapse">
                 <!-- for logged-in user-->
                 <div class="navbar-nav">
-                    <router-link to="/dashboard" class="nav-item nav-link">Dashboard</router-link>
+                    <router-link to="/shops" class="nav-item nav-link">Shops</router-link>
                     <router-link to="/users" class="nav-item nav-link">Users</router-link>
                     <a class="nav-item nav-link" style="cursor: pointer;" @click="logout">Logout</a>
                 </div>

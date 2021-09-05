@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Models\MallShop;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class MallShopController extends Controller
 {
@@ -14,7 +15,9 @@ class MallShopController extends Controller
      */
     public function index()
     {
-        //
+        $shops = MallShop::all()->toArray();
+
+        return array_reverse($shops);
     }
 
     /**

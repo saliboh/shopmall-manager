@@ -3,7 +3,9 @@ import { createWebHistory, createRouter } from "vue-router";
 import About from '../pages/About.vue';
 import Register from '../pages/Register.vue';
 import Login from '../pages/Login.vue';
-import Dashboard from '../pages/Dashboard.vue';
+
+import Shops from '../components/Shops.vue';
+import ExportCsv from '../components/ExportCsv.vue';
 
 import Users from '../components/Users.vue';
 import AddUser from '../components/AddUser.vue';
@@ -25,9 +27,9 @@ export const routes = [{
         component: Register
     },
     {
-        name: 'dashboard',
-        path: '/dashboard',
-        component: Dashboard
+        name: 'shops',
+        path: '/shops',
+        component: Shops
     },
     {
         name: 'users',
@@ -49,6 +51,16 @@ export const routes = [{
         path: '/users/update/:id',
         component: EditUser
     },
+    {
+        name: 'shops',
+        path: '/shops',
+        component: Shops
+    },
+    {
+        name: 'exportcsv',
+        path: '/shops/exportcsv',
+        component: ExportCsv
+    }
 ];
 
 const router = createRouter({
