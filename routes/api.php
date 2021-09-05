@@ -1,10 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\MallShopController;
-use App\Models\MallShop;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +15,6 @@ use App\Models\MallShop;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
 Route::post('login', [UserController::class, 'login']);
 Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 
@@ -32,6 +26,9 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth:sanctum'], function () 
     Route::delete('delete/{id}', [UserController::class, 'delete'])->middleware(['userRole:super-admin']);
 });
 
-Route::group(['prefix' => 'shops'], function () {
+Route::group(['prefix' => 'shops', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [MallShopController::class, 'index']);
 });
+
+//For Door Sensor, Shop Visit Count
+Route::post('door-sensor', [MallShopController::class, 'visit']);
