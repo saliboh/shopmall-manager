@@ -1,0 +1,59 @@
+version: '3'
+services:
+
+  #PHP Service
+  app:
+    build:
+      args:
+        user: admin
+        uid: 1000
+      context: ./
+      dockerfile: ./infra/Dockerfile
+    image: shopmall
+    container_name: app
+    restart: unless-stopped
+    tty: true
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    networks:
+      - app-network
+
+  #Nginx Service
+  webserver:
+    image: nginx:alpine
+    container_name: webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www
+      - ./infra/nginx:/etc/nginx/conf.d/
+    networks:
+      - app-network
+
+  #MySQL Service
+  db:
+    build: ./infra/mysql
+    tty: true
+    ports:
+      - "3306:3306"
+    volumes:
+       - ./infra/mysql/mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: shopmall
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    command: "--innodb_use_native_aio=0"
+    networks:
+      - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+#Volumes
+volumes:
+  dbdata:
+    driver: local
