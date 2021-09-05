@@ -9,6 +9,7 @@
                 <th>Name</th>
                 <th>Store Owner</th>
                 <th>Floor</th>
+                <th>Visitors</th>
             </tr>
             </thead>
             <tbody>
@@ -17,6 +18,7 @@
                 <td>{{ shop.name }}</td>
                 <td>{{ shop.user_id }}</td>
                 <td>{{ shop.floor_number }}</td>
+                <td>{{ shop.store_visits }}</td>
             </tr>
             </tbody>
         </table>

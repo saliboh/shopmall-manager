@@ -29,7 +29,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `mall_shops` WRITE;
 /*!40000 ALTER TABLE `mall_shops` DISABLE KEYS */;
-INSERT INTO `mall_shops` (`id`, `user_id`, `name`, `floor_number`, `created_at`, `updated_at`) VALUES (1,1,'Miss Anita Labadie',1,'2021-09-05 08:22:28','2021-09-05 08:22:28'),(2,1,'Annie Parisian MD',55,'2021-09-05 08:22:28','2021-09-05 08:22:28'),(3,1,'Corine Homenick',79,'2021-09-05 08:22:28','2021-09-05 08:22:28'),(4,1,'Glen Smith',78,'2021-09-05 08:22:28','2021-09-05 08:22:28'),(5,1,'Gerald Spencer',57,'2021-09-05 08:22:28','2021-09-05 08:22:28'),(6,5,'Kennith Gulgowski IV',72,'2021-09-05 08:22:53','2021-09-05 08:22:53'),(7,5,'Stanford Schuster',64,'2021-09-05 08:22:53','2021-09-05 08:22:53'),(8,5,'Frank Yost',78,'2021-09-05 08:22:53','2021-09-05 08:22:53'),(9,5,'Mr. Orval Ratke I',94,'2021-09-05 08:22:53','2021-09-05 08:22:53'),(10,5,'Tommie Bahringer',36,'2021-09-05 08:22:53','2021-09-05 08:22:53');
+INSERT INTO `mall_shops` (`id`, `user_id`, `name`, `floor_number`, `store_visits`, `created_at`, `updated_at`) VALUES (1,4,'Miss Noemy Stoltenberg',76,70,'2021-09-05 09:20:40','2021-09-05 09:20:40'),(2,4,'Alexys Leuschke',22,54,'2021-09-05 09:20:40','2021-09-05 09:20:40'),(3,4,'Raphaelle Ruecker',38,81,'2021-09-05 09:20:40','2021-09-05 09:20:40'),(4,4,'Dr. Scarlett Davis II',22,37,'2021-09-05 09:20:40','2021-09-05 09:20:40'),(5,4,'Kaitlyn Reichel',40,62,'2021-09-05 09:20:40','2021-09-05 09:20:40'),(6,5,'Darwin Marquardt III',38,24,'2021-09-05 09:21:08','2021-09-05 09:21:08'),(7,5,'Darrick Moen',51,2,'2021-09-05 09:21:08','2021-09-05 09:21:08'),(8,5,'Frankie Ernser',98,52,'2021-09-05 09:21:08','2021-09-05 09:21:08'),(9,5,'Mrs. Noemi Bruen I',5,69,'2021-09-05 09:21:08','2021-09-05 09:21:08'),(10,5,'Prof. Russel Becker',12,36,'2021-09-05 09:21:08','2021-09-05 09:21:08');
 /*!40000 ALTER TABLE `mall_shops` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +57,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `role`) VALUES (1,'Antonia Kiehn','melyna.wilkinson@example.com','2021-09-05 08:22:28','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','9SQmpfw955','2021-09-05 08:22:28','2021-09-05 08:22:28','store-owner'),(2,'Super Admin','superadmin@example.com','2021-09-05 08:22:32','$2y$10$5ryoVeGlYomu2PJOGqn7Xe9ui8BrCMBq3z/gtleFPCYu6OnO8HQ2.','qp0h4U0pJj','2021-09-05 08:22:32','2021-09-05 08:22:32','super-admin'),(3,'Shop Manager','shop-manager@example.com','2021-09-05 08:22:32','$2y$10$vPVk92MAJyYljClNctNOuuXxB2VuIH78h.WHQiN2/dVXnsDn89K/W','YkxDRa4wZx','2021-09-05 08:22:32','2021-09-05 08:22:32','shop-manager'),(4,'Store Owner','store-owner@example.com','2021-09-05 08:22:32','$2y$10$wRPk5iNc7mi4m7UiO6gqseesasqgv7Xg21ZPGEPHWTw76UZR3EGo6','aXfPUHwDwM','2021-09-05 08:22:32','2021-09-05 08:22:32','store-owner'),(5,'Ms. Romaine Johnson','reinger.leatha@example.net','2021-09-05 08:22:53','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','xgrW9nYPYX','2021-09-05 08:22:53','2021-09-05 08:22:53','store-owner');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `role`) VALUES (1,'Super Admin','superadmin@example.com','2021-09-05 09:20:37','$2y$10$w7aHMPiO3XeyE4gq7.N9YegpF1aNUeeNGfdeYBqKzN9LuKYiS5efC','XTMcZVWPyN','2021-09-05 09:20:37','2021-09-05 09:20:37','super-admin'),(2,'Shop Manager','shop-manager@example.com','2021-09-05 09:20:37','$2y$10$Q8mIJQGWxFhO8hzqtEvgs.F.dpPReD/vCkn3Gv0TvVR4zNZjlNA02','AgioClJ4o1','2021-09-05 09:20:37','2021-09-05 09:20:37','shop-manager'),(3,'Store Owner','store-owner@example.com','2021-09-05 09:20:37','$2y$10$YrNd2koH/6HM95XdsN4BtO2jPwOACBA0w7X6r5KorxF3kGFf3oPQC','bZckZc7mR4','2021-09-05 09:20:37','2021-09-05 09:20:37','store-owner'),(4,'Phoebe Kovacek','lwunsch@example.com','2021-09-05 09:20:40','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','fF0MW6AuaL','2021-09-05 09:20:40','2021-09-05 09:20:40','store-owner'),(5,'Zola Schoen','izaiah.boehm@example.com','2021-09-05 09:21:08','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','1Ossx5r3Ol','2021-09-05 09:21:08','2021-09-05 09:21:08','store-owner');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -69,4 +69,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-09-05  8:55:38
+-- Dump completed on 2021-09-05  9:21:16

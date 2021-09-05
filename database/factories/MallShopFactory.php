@@ -25,6 +25,7 @@ class MallShopFactory extends Factory
             'user_id' => 1,
             'name' => $this->faker->name(),
             'floor_number' => $this->faker->numerify('##'),
+            'store_visits' => $this->faker->numerify('##'),
         ];
     }
 }

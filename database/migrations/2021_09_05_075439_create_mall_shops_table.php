@@ -18,6 +18,7 @@ class CreateMallShopsTable extends Migration
             $table->integer('user_id')->references('id')->on('users');
             $table->string('name');
             $table->integer('floor_number');
+            $table->integer('store_visits');
             $table->timestamps();
         });
     }
