@@ -14,7 +14,7 @@
                     </div>
                     <div class="form-group">
                         <label>Password</label>
-                        <input type="password" style="display:none" class="form-control" v-model="user.password">
+                        <input type="password" class="form-control" v-model="user.password">
                     </div>
                     <div class="form-group">
                         <label>Role</label>
