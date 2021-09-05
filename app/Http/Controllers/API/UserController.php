@@ -11,7 +11,6 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
-
     public function index()
     {
         $users = User::all()->toArray();
@@ -21,7 +20,6 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $user->password = '';
         return response()->json($user);
     }
 
@@ -32,11 +30,7 @@ class UserController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
             $user->role = $request->role;
-
-            if($request->password != '') {
-                $user->password = Hash::make($request->password);
-            }
-
+            $user->password = Hash::make($request->password);
             $user->save();
 
             $success = true;
@@ -49,6 +43,7 @@ class UserController extends Controller
         $response = [
             'success' => $success,
             'message' => $message,
+            'user' => $user,
         ];
         return response()->json($response);
     }
