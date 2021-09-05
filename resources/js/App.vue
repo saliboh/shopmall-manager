@@ -4,19 +4,13 @@
             <span class="text-secondary">SHOPPING MALL MANAGER</span>
         </div>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" v-if="isLoggedIn">
             <div class="collapse navbar-collapse">
                 <!-- for logged-in user-->
-                <div class="navbar-nav" v-if="isLoggedIn">
+                <div class="navbar-nav">
                     <router-link to="/dashboard" class="nav-item nav-link">Dashboard</router-link>
                     <router-link to="/users" class="nav-item nav-link">Users</router-link>
                     <a class="nav-item nav-link" style="cursor: pointer;" @click="logout">Logout</a>
-                </div>
-                <!-- for non-logged user-->
-                <div class="navbar-nav" v-else>
-                    <router-link to="/" class="nav-item nav-link">Home</router-link>
-                    <router-link to="/login" class="nav-item nav-link">Login</router-link>
-                    <router-link to="/about" class="nav-item nav-link">About</router-link>
                 </div>
             </div>
         </nav>
