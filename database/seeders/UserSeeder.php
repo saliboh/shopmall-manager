@@ -18,7 +18,22 @@ class UserSeeder extends Seeder
         User::factory(1)->create([
             'name' => "Super Admin",
             'email' => "superadmin@example.com",
-            'password' => bcrypt('123123')
+            'password' => bcrypt('123123'),
+            'role'=> User::ROLES['super-admin'],
+        ]);
+
+        User::factory()->create([
+            'name' => "Shop Manager",
+            'email' => "shop-manager@example.com",
+            'password' => bcrypt('123123'),
+            'role'=> User::ROLES['shop-manager'],
+        ]);
+
+        $storeOwner = User::factory()->create([
+            'name' => "Store Owner",
+            'email' => "store-owner@example.com",
+            'password' => bcrypt('123123'),
+            'role'=> User::ROLES['store-owner'],
         ]);
     }
 }

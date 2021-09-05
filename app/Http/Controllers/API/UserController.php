@@ -13,13 +13,18 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all()->toArray();
+        $users = User::query()
+            ->where('id', '!=', Auth::user()->id)
+            ->where('role', '!=', 'super-admin')
+            ->get()->toArray();
+
         return array_reverse($users);
     }
 
     public function edit($id)
     {
         $user = User::find($id);
+        $user->password = '';
         return response()->json($user);
     }
 

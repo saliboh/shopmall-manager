@@ -20108,7 +20108,7 @@ var _hoisted_8 = {
   "class": "form-group"
 };
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Password", -1
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Passwords", -1
 /* HOISTED */
 );
 
@@ -20164,9 +20164,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.user.email]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "password",
-    style: {
-      "display": "none"
-    },
     "class": "form-control",
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $data.user.password = $event;
