@@ -1,7 +1,7 @@
 <template>
     <div>
         <h4 class="text-center">All Shops on the Mall</h4><br/>
-        <button type="button" class="btn btn-info mb-2" @click="this.$router.push('/shops/exportcsv')">Export CSV</button>
+        <a type="button" href="csv-export" class="btn btn-info mb-2">Export CSV</a>
         <table class="table table-bordered">
             <thead>
             <tr>
