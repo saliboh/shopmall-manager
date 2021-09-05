@@ -39,3 +39,9 @@ SHOP MANAGER
 user: store-owner@example.com
 pass: 123123
 ```
+
+# Unit Tests
+Preparation: Create test_shopmall database in your local
+
+Example on how to run test inside app container
+`vendor/bin/phpunit tests/Unit/Services`
