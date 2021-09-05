@@ -1,5 +1,8 @@
 # Run Local Dev
+```
 docker-compose up -d
+npm install
+```
 
 # Start the laravel app
 Go inside container
@@ -21,6 +24,8 @@ Generate Key
 Clear config
 `php artisan config:clear`
 
+NPM Install
+```npm install```
 
 # Logging In
 Preparation: Must run `composer fixture:dump` first from app container
