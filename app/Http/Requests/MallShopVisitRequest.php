@@ -35,6 +35,7 @@ class MallShopVisitRequest extends FormRequest
     {
         return [
             'shopmall_id.required' => 'Shop ID is required',
+            'shopmall_id.integer' => 'Shop ID must be an integer',
         ];
     }
 }
