@@ -29,7 +29,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `mall_shops` WRITE;
 /*!40000 ALTER TABLE `mall_shops` DISABLE KEYS */;
-INSERT INTO `mall_shops` (`id`, `user_id`, `name`, `floor_number`, `store_visits`, `created_at`, `updated_at`) VALUES (1,4,'Miss Noemy Stoltenberg',76,70,'2021-09-05 09:20:40','2021-09-05 09:20:40'),(2,4,'Alexys Leuschke',22,54,'2021-09-05 09:20:40','2021-09-05 09:20:40'),(3,4,'Raphaelle Ruecker',38,81,'2021-09-05 09:20:40','2021-09-05 09:20:40'),(4,4,'Dr. Scarlett Davis II',22,37,'2021-09-05 09:20:40','2021-09-05 09:20:40'),(5,4,'Kaitlyn Reichel',40,62,'2021-09-05 09:20:40','2021-09-05 09:20:40'),(6,5,'Darwin Marquardt III',38,24,'2021-09-05 09:21:08','2021-09-05 09:21:08'),(7,5,'Darrick Moen',51,2,'2021-09-05 09:21:08','2021-09-05 09:21:08'),(8,5,'Frankie Ernser',98,52,'2021-09-05 09:21:08','2021-09-05 09:21:08'),(9,5,'Mrs. Noemi Bruen I',5,69,'2021-09-05 09:21:08','2021-09-05 09:21:08'),(10,5,'Prof. Russel Becker',12,36,'2021-09-05 09:21:08','2021-09-05 09:21:08');
+INSERT INTO `mall_shops` (`id`, `user_id`, `name`, `floor_number`, `store_visits`, `created_at`, `updated_at`) VALUES (1,4,'Ms. Alexa Parker',40,37,'2021-09-05 09:31:55','2021-09-05 09:31:55'),(2,4,'Nickolas Beier',21,99,'2021-09-05 09:31:55','2021-09-05 09:31:55'),(3,4,'Mrs. Elisha Leannon',85,35,'2021-09-05 09:31:55','2021-09-05 09:31:55'),(4,5,'Mr. Kristoffer Ratke',64,32,'2021-09-05 09:31:55','2021-09-05 09:31:55'),(5,5,'Mrs. Albertha Bergstrom PhD',69,52,'2021-09-05 09:31:55','2021-09-05 09:31:55'),(6,5,'Marielle Runte',31,68,'2021-09-05 09:31:55','2021-09-05 09:31:55');
 /*!40000 ALTER TABLE `mall_shops` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +57,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `role`) VALUES (1,'Super Admin','superadmin@example.com','2021-09-05 09:20:37','$2y$10$w7aHMPiO3XeyE4gq7.N9YegpF1aNUeeNGfdeYBqKzN9LuKYiS5efC','XTMcZVWPyN','2021-09-05 09:20:37','2021-09-05 09:20:37','super-admin'),(2,'Shop Manager','shop-manager@example.com','2021-09-05 09:20:37','$2y$10$Q8mIJQGWxFhO8hzqtEvgs.F.dpPReD/vCkn3Gv0TvVR4zNZjlNA02','AgioClJ4o1','2021-09-05 09:20:37','2021-09-05 09:20:37','shop-manager'),(3,'Store Owner','store-owner@example.com','2021-09-05 09:20:37','$2y$10$YrNd2koH/6HM95XdsN4BtO2jPwOACBA0w7X6r5KorxF3kGFf3oPQC','bZckZc7mR4','2021-09-05 09:20:37','2021-09-05 09:20:37','store-owner'),(4,'Phoebe Kovacek','lwunsch@example.com','2021-09-05 09:20:40','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','fF0MW6AuaL','2021-09-05 09:20:40','2021-09-05 09:20:40','store-owner'),(5,'Zola Schoen','izaiah.boehm@example.com','2021-09-05 09:21:08','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','1Ossx5r3Ol','2021-09-05 09:21:08','2021-09-05 09:21:08','store-owner');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `role`) VALUES (1,'Super Admin','superadmin@example.com','2021-09-05 09:31:50','$2y$10$.Pvimk5vbwyjrcjRmRLkyu8i3D/QnnRZ.ZeByxn46IUUIv5gD1Wf.','ZnD2EkaGsg','2021-09-05 09:31:50','2021-09-05 09:31:50','super-admin'),(2,'Shop Manager','shop-manager@example.com','2021-09-05 09:31:50','$2y$10$GfNfaQ4FekZWXEJZkhPxH.1SiAU6JyJScEVFcqyWLEcw.FDnEd7wy','lTdFUagHJV','2021-09-05 09:31:50','2021-09-05 09:31:50','shop-manager'),(3,'Store Owner','store-owner@example.com','2021-09-05 09:31:51','$2y$10$ZOTNkFmFuaIVH63IkjjjN.9Dg22fllLfR1.tNJ6uUqltFvbGPoU3u','gaI7xfsHmU','2021-09-05 09:31:51','2021-09-05 09:31:51','store-owner'),(4,'Larissa Parker','qklocko@example.com','2021-09-05 09:31:54','$2y$10$vorPvL1yjb0vgbcFQ9.3D.HibgY5u4dlQhUUK0bV0PG7X1pjLWajm','1XgvXykGQc','2021-09-05 09:31:54','2021-09-05 09:31:54','store-owner'),(5,'Isabel Schinner DDS','vfunk@example.net','2021-09-05 09:31:55','$2y$10$2/8v9tj/e9jOVt.5r7ppZeeq02Vxq68Ib7/BAR.EogE6klpqs5j6i','zOBXkyTZ29','2021-09-05 09:31:55','2021-09-05 09:31:55','store-owner');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -69,4 +69,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-09-05  9:21:16
+-- Dump completed on 2021-09-05  9:32:00

@@ -15,12 +15,22 @@ class MallShopSeeder extends Seeder
      */
     public function run()
     {
-        $storeOwner = User::factory()->create([
-            'role'=> User::ROLES['store-owner']
+        $storeOwnerA = User::factory()->create([
+            'role'=> User::ROLES['store-owner'],
+            'password' => bcrypt('123123'),
         ]);
 
-        MallShop::factory(5)->create([
-            'user_id' => $storeOwner->id,
+        $storeOwnerB = User::factory()->create([
+            'role'=> User::ROLES['store-owner'],
+            'password' => bcrypt('123123'),
+        ]);
+
+        MallShop::factory(3)->create([
+            'user_id' => $storeOwnerA->id,
+        ]);
+
+        MallShop::factory(3)->create([
+            'user_id' => $storeOwnerB->id,
         ]);
     }
 }
