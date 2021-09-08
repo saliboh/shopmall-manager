@@ -139,4 +139,42 @@ class ShopServiceTest extends TestCase
 
         $this->assertEquals($form['name'], Shop::whereName('NEW')->get()->first()->name);
     }
+
+    /**
+     * @test
+     */
+    public function deleteSuccess(): void
+    {
+        $shopToBeDelted = Shop::factory()->create([
+            'user_id' => $this->storeOwnerB->id,
+            'visit' => 50,
+            'floor' => 2,
+        ]);
+
+        $form = [
+            'id' => $shopToBeDelted->id,
+        ];
+
+        $result = $this->actingAs($this->shopManager)->shopService->delete($form);
+        $this->assertTrue($result['delete-status']);
+
+    }
+
+    /**
+     * @test
+     */
+    public function updateSuccess(): void
+    {
+        $form = [
+            'id' => $this->mallShopStoreA->id,
+            'user_id' => $this->mallShopStoreA->user_id,
+            'name' => 'New Name',
+            'visit' => 55,
+            'floor' => 1,
+        ];
+
+        $result = $this->actingAs($this->shopManager)->shopService->update($form);
+
+        $this->assertTrue($result['update-status']);
+    }
 }

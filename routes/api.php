@@ -31,7 +31,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/shops/retrieve-stores', [ShopController::class, 'retrieveStoresForStoreOwner']);
     Route::post('/shops/admin/retrieve-stores', [ShopController::class, 'retrieveAllStoresForAdmin']);
 
-    Route::post('/shops/admin/create', [ShopController::class, 'createShop']);
-    Route::post('/shops/admin/update', [ShopController::class, 'update']);
-    Route::post('/shops/admin/delete', [ShopController::class, 'update']);
+    Route::post('/shops/admin/create', [ShopController::class, 'create']);
+    Route::patch('/shops/admin/update', [ShopController::class, 'update']);
+    Route::delete('/shops/admin/delete', [ShopController::class, 'delete']);
 });

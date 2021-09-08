@@ -90,4 +90,30 @@ class ShopService
         ]);
     }
 
+    public function delete(array $request): array
+    {
+        $shop = Shop::find($request['id']);
+        $status = $shop->delete();
+
+        return([
+            'requester-user-id' => Auth::user()->id,
+            'requester-user-role' => Auth::user()->role,
+            'delete-status' => $status,
+        ]);
+    }
+
+    public function update(array $request): array
+    {
+        $shop = Shop::find($request['id']);
+        $shop->user_id = $request['user_id'];
+        $shop->name = $request['name'];
+        $shop->visit = $request['visit'];
+        $shop->floor = $request['floor'];
+
+        return([
+            'requester-user-id' => Auth::user()->id,
+            'requester-user-role' => Auth::user()->role,
+            'update-status' => $shop->save(),
+        ]);
+    }
 }

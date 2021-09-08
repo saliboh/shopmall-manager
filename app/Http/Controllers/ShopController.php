@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ShopCreateRequest;
+use App\Http\Requests\ShopDeleteRequest;
 use App\Http\Requests\ShopRetrieveRequest;
+use App\Http\Requests\ShopUpdateRequest;
 use App\Http\Requests\ShopVisitRequest;
 use App\Models\User;
 use App\Services\ShopService;
@@ -19,6 +21,45 @@ class ShopController extends Controller
     public function __construct(ShopService $shopService)
     {
         $this->shopService = $shopService;
+    }
+
+    public function create(ShopCreateRequest $request)
+    {
+        if($this->isNotAdmin()) {
+            return response([
+                'message' => 'Your do not have the right role to do this task'
+            ], 401);
+        }
+
+        $result = $this->shopService->create($request->validated());
+
+        return response($result, 201);
+    }
+
+    public function update(ShopUpdateRequest $request)
+    {
+        if($this->isNotAdmin()) {
+            return response([
+                'message' => 'Your do not have the right role to do this task'
+            ], 401);
+        }
+
+        $result = $this->shopService->update($request->validated());
+
+        return response($result, 200);
+    }
+
+    public function delete(ShopDeleteRequest $request)
+    {
+        if($this->isNotAdmin()) {
+            return response([
+                'message' => 'Your do not have the right role to do this task'
+            ], 401);
+        }
+
+        $result = $this->shopService->delete($request->validated());
+
+        return response($result, 200);
     }
 
     /**
@@ -82,22 +123,6 @@ class ShopController extends Controller
         $result = $this->shopService->retrieveAllStores(Auth::user()->id, $validatedRequest['floor'] ?? null);
 
         return response($result, 200);
-    }
-
-    /**
-     * Create
-     */
-    public function createShop(ShopCreateRequest $request)
-    {
-        if($this->isNotAdmin()) {
-            return response([
-                'message' => 'Your do not have the right role to do this task'
-            ], 401);
-        }
-
-        $result = $this->shopService->create($request->validated());
-
-        return response($result, 201);
     }
 
     private function isNotAdmin(): bool

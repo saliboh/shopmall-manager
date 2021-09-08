@@ -143,4 +143,105 @@ class ShopTest extends TestCase
         $response->assertStatus(201);
     }
 
+    /**
+     * @test
+     */
+    public function createFail(): void
+    {
+        Session::start();
+
+        $requestForm = [
+            '_token' => csrf_token(),
+            'user_id' => $this->storeOwnerB->id,
+            'name' => 'NEW',
+            'floor' => 2
+        ];
+
+        $response = $this->actingAs($this->storeOwnerA)->call('POST', 'api/shops/admin/create', $requestForm);
+        $response->assertStatus(401);
+    }
+
+    /**
+     * @test
+     */
+    public function deleteSuccess(): void
+    {
+        Session::start();
+
+        $shopToBeDelted = Shop::factory()->create([
+            'user_id' => $this->storeOwnerB->id,
+            'visit' => 50,
+            'floor' => 2,
+        ]);
+
+        $requestForm = [
+            '_token' => csrf_token(),
+            'id' => $shopToBeDelted->id,
+        ];
+
+        $response = $this->actingAs($this->shopManager)->call('DELETE', 'api/shops/admin/delete', $requestForm);
+        $response->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function deleteFail(): void
+    {
+        Session::start();
+
+        $shopToBeDelted = Shop::factory()->create([
+            'user_id' => $this->storeOwnerB->id,
+            'visit' => 50,
+            'floor' => 2,
+        ]);
+
+        $requestForm = [
+            '_token' => csrf_token(),
+            'id' => $shopToBeDelted->id,
+        ];
+
+        $response = $this->actingAs($this->storeOwnerA)->call('DELETE', 'api/shops/admin/delete', $requestForm);
+        $response->assertStatus(401);
+    }
+
+    /**
+     * @test
+     */
+    public function updateSuccess(): void
+    {
+        Session::start();
+
+        $requestForm = [
+            '_token' => csrf_token(),
+            'id' => $this->mallShopStoreB->id,
+            'name' => 'New Name',
+            'floor' => 100,
+            'visit' => 1,
+            'user_id' => $this->mallShopStoreB->user_id,
+        ];
+
+        $response = $this->actingAs($this->shopManager)->call('PATCH', 'api/shops/admin/update', $requestForm);
+        $response->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function updateFail(): void
+    {
+        Session::start();
+
+        $requestForm = [
+            '_token' => csrf_token(),
+            'id' => $this->mallShopStoreB->id,
+            'name' => 'New Name',
+            'floor' => 100,
+            'visit' => 1,
+            'user_id' => $this->mallShopStoreB->user_id,
+        ];
+
+        $response = $this->actingAs($this->storeOwnerA)->call('PATCH', 'api/shops/admin/update', $requestForm);
+        $response->assertStatus(401);
+    }
 }
