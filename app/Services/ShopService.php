@@ -47,4 +47,34 @@ class ShopService
         ];
     }
 
+    public function retrieveShopsByStoreOwner($userId, $floor = null)
+    {
+        $shops = $this->shopRepository->getStoresByStoreOwnerId($userId, $floor)->toArray();
+
+        return([
+            'requester-user-id' => $userId,
+            'requester-user-role' => Auth::user()->role,
+            'total-stores' => count($shops),
+            'data' => $shops,
+        ]);
+    }
+
+    public function retrieveAllStores($userId, $floor)
+    {
+        if($floor == null) {
+            $shops = $this->shopRepository->all()->toArray();
+        }
+        else {
+            $shops = $this->shopRepository->getStoreByFloorNumber($floor);
+        }
+
+        return([
+            'floor' => $floor,
+            'requester-user-id' => $userId,
+            'requester-user-role' => Auth::user()->role,
+            'total-stores' => count($shops),
+            'data' => $shops,
+        ]);
+    }
+
 }

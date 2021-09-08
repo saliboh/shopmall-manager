@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ShopRetrieveRequest;
 use App\Http\Requests\ShopVisitRequest;
 use App\Models\User;
 use App\Services\ShopService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
@@ -20,6 +20,9 @@ class ShopController extends Controller
         $this->shopService = $shopService;
     }
 
+    /**
+     * Only The Door Sensor with Account Store Owner Role can send the data
+     */
     public function updateVisits(ShopVisitRequest $request)
     {
         $fields = $request->validated();
@@ -40,9 +43,44 @@ class ShopController extends Controller
             ], 401);
         }
 
-        $response = $this->shopService->updateShopVisitorCount($fields);
+        $result = $this->shopService->updateShopVisitorCount($fields);
 
-        return response($response, 201);
+        return response($result, 201);
+    }
+
+    /**
+     * Retrieve all Store owner's store, per floor
+     */
+    public function retrieveStoresForStoreOwner(ShopRetrieveRequest $request)
+    {
+        if(Auth::user()->role == User::ROLES['store-owner'])
+        {
+            $result = $this->shopService->retrieveShopsByStoreOwner(Auth::user()->id, $request['floor'] ?? null);
+
+            return response($result, 201);
+        }
+
+        return response([
+            'message' => 'Your do not have the right role to do this task'
+        ], 401);
+    }
+
+    /**
+     * Retrieve all stores per floor, for Admin (Shop Manager | Super Admin)
+     */
+    public function retrieveAllStoresForAdmin(ShopRetrieveRequest $request)
+    {
+        $validatedRequest = $request->validated();
+        if(Auth::user()->role == User::ROLES['super-admin'] || Auth::user()->role == User::ROLES['shop-manager'])
+        {
+            $result = $this->shopService->retrieveAllStores(Auth::user()->id, $validatedRequest['floor'] ?? null);
+
+            return response($result, 201);
+        }
+
+        return response([
+            'message' => 'Your do not have the right role to do this task'
+        ], 401);
     }
 
 }

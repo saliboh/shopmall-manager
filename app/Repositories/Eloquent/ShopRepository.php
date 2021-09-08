@@ -26,4 +26,21 @@ class ShopRepository extends BaseRepository
    {
        return $this->model->all();
    }
+
+   public function getStoresByStoreOwnerId($userId, $floor = null)
+   {
+       $query = $this->model->query();
+
+       if($floor != null) {
+            $query = $query->where('floor', '=', $floor);
+       }
+
+       return $query->where('user_id', '=', $userId)->get();
+
+   }
+
+   public function getStoreByFloorNumber($floor)
+   {
+       return $this->model->where('floor', '=', $floor)->get();
+   }
 }

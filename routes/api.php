@@ -27,5 +27,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/shops/door-sensor', [ShopController::class, 'updateVisits']);
-    Route::get('/shops/retrieve-stores', [ShopController::class, 'retrieveStores']);
+    Route::post('/shops/retrieve-stores', [ShopController::class, 'retrieveStoresForStoreOwner']);
+    Route::post('/shops/admin/retrieve-stores', [ShopController::class, 'retrieveAllStoresForAdmin']);
 });
