@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ShopCreateRequest;
 use App\Http\Requests\ShopRetrieveRequest;
 use App\Http\Requests\ShopVisitRequest;
 use App\Models\User;
@@ -72,7 +73,7 @@ class ShopController extends Controller
     {
         $validatedRequest = $request->validated();
 
-        if(Auth::user()->role != User::ROLES['super-admin'] && Auth::user()->role != User::ROLES['shop-manager']) {
+        if($this->isNotAdmin()) {
             return response([
                 'message' => 'Your do not have the right role to do this task'
             ], 401);
@@ -81,6 +82,28 @@ class ShopController extends Controller
         $result = $this->shopService->retrieveAllStores(Auth::user()->id, $validatedRequest['floor'] ?? null);
 
         return response($result, 200);
+    }
+
+    /**
+     * Create
+     */
+    public function createShop(ShopCreateRequest $request)
+    {
+        if($this->isNotAdmin()) {
+            return response([
+                'message' => 'Your do not have the right role to do this task'
+            ], 401);
+        }
+
+        $result = $this->shopService->create($request->validated());
+
+        return response($result, 201);
+    }
+
+    private function isNotAdmin(): bool
+    {
+        return Auth::user()->role != User::ROLES['super-admin'] &&
+            Auth::user()->role != User::ROLES['shop-manager'];
     }
 
 }

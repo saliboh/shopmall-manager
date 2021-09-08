@@ -125,4 +125,22 @@ class ShopTest extends TestCase
         $response->assertStatus(401);
     }
 
+    /**
+     * @test
+     */
+    public function createSuccess(): void
+    {
+        Session::start();
+
+        $requestForm = [
+            '_token' => csrf_token(),
+            'user_id' => $this->storeOwnerB->id,
+            'name' => 'NEW',
+            'floor' => 2
+        ];
+
+        $response = $this->actingAs($this->shopManager)->call('POST', 'api/shops/admin/create', $requestForm);
+        $response->assertStatus(201);
+    }
+
 }

@@ -123,4 +123,20 @@ class ShopServiceTest extends TestCase
         $result = $this->actingAs($this->shopManager)->shopService->retrieveAllStores($this->storeOwnerB->id, $form);
         $this->assertEquals(3, $result['total-stores']);
     }
+
+    /**
+     * @test
+     */
+    public function createSuccess(): void
+    {
+        $form = [
+            'user_id' => $this->storeOwnerB->id,
+            'name' => 'NEW',
+            'floor' => 2
+        ];
+
+        $this->actingAs($this->shopManager)->shopService->create($form);
+
+        $this->assertEquals($form['name'], Shop::whereName('NEW')->get()->first()->name);
+    }
 }

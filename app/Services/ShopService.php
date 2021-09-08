@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Shop;
 use App\Models\User;
 use App\Repositories\Eloquent\ShopRepository;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,7 @@ class ShopService
     /**
      * @var MallShopRepository $shopRepository
      */
-    private $userRepository;
+    private $shopRepository;
 
     public function __construct(ShopRepository $shopRepository)
     {
@@ -74,6 +75,18 @@ class ShopService
             'requester-user-role' => Auth::user()->role,
             'total-stores' => count($shops),
             'data' => $shops,
+        ]);
+    }
+
+    public function create(array $request): array
+    {
+        $request['visit'] = 0;
+        $shop = Shop::create($request);
+
+        return([
+            'requester-user-id' => Auth::user()->id,
+            'requester-user-role' => Auth::user()->role,
+            'data' => $shop,
         ]);
     }
 
