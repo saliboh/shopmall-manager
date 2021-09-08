@@ -15,9 +15,14 @@ class UserService
      */
     private $userRepository;
 
-    public function __construct(UserRepository $shopRepository)
+    public function __construct(UserRepository $userRepository)
     {
-        $this->shopRepository = $shopRepository;
+        $this->userRepository = $userRepository;
+    }
+
+    public function getAllExceptUserHavingThisId($userId)
+    {
+        return $this->userRepository->getAllExceptUserId($userId)->toArray();
     }
 
     public function delete(array $request): array

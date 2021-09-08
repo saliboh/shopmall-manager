@@ -20,6 +20,26 @@ class UserController extends Controller
         $this->userService = $userService;
     }
 
+    public function index()
+    {
+        if(Auth::user()->role != 'super-admin')
+        {
+            return response([
+                'message' => 'Your role is not allowed to do this action'
+            ], 401);
+        }
+
+        $users = $this->userService
+            ->getAllExceptUserHavingThisId(Auth::user()->id);
+
+        $response = [
+            'data' => $users,
+        ];
+
+        return response()->json($users, 200);
+        //return array_reverse($users);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

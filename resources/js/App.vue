@@ -9,7 +9,7 @@
                 <!-- for logged-in user-->
                 <div class="navbar-nav">
                     <router-link to="/shops" class="nav-item nav-link">Shops</router-link>
-                    <router-link to="/users" class="nav-item nav-link">Users</router-link>
+                    <router-link to="/admin/users/index" class="nav-item nav-link">Users</router-link>
                     <a class="nav-item nav-link" style="cursor: pointer;" @click="logout">Logout</a>
                 </div>
             </div>

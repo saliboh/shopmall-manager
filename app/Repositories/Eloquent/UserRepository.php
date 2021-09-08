@@ -26,4 +26,12 @@ class UserRepository extends BaseRepository
    {
        return $this->model->all();
    }
+
+   public function getAllExceptUserId($userId)
+    {
+        return $this->model
+            ->where('id', '!=', $userId)
+            ->where('role', '!=', 'super-admin')
+            ->get();
+    }
 }
