@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Session;
 use App\Http\Requests\AuthUserLoginRequest;
 use App\Http\Requests\AuthUserRegisterRequest;
 use App\Models\User;
@@ -55,21 +56,43 @@ class AuthController extends Controller
             ], 401);
         }
 
+        if (Auth::attempt($fields)) {
+            $success = true;
+            $message = 'User login successfully';
+        } else {
+            $success = false;
+            $message = 'Unauthorised';
+        }
+
         $token = $user->createToken('myapptoken')->plainTextToken;
 
         $response = [
             'user' => $user,
-            'token' => $token
+            'token' => $token,
+            'success' => $success,
+            'message' => $message
         ];
 
-        return response($response, 201);
+        return response($response,201);
     }
 
     public function logout(Request $request) {
-        auth()->user()->tokens()->delete();
 
-        return [
-            'message' => 'Logged out'
+        try {
+            Session::flush();
+            $success = true;
+            $message = 'Successfully logged out';
+            auth()->user()->tokens()->delete();
+        } catch (\Illuminate\Database\QueryException $ex) {
+            $success = false;
+            $message = $ex->getMessage();
+        }
+
+        $response = [
+            'success' => $success,
+            'message' => $message,
         ];
+
+        return response()->json($response);
     }
 }
