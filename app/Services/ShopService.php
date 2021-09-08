@@ -21,7 +21,7 @@ class ShopService
         $this->shopRepository = $shopRepository;
     }
 
-    public function updateShopVisitorCount(array $request)
+    public function updateShopVisitorCount(array $request): array
     {
         $shop =  $this->shopRepository->find($request['id']);
         $shopCountBeforeUpdate = $shop->visit;
@@ -47,7 +47,7 @@ class ShopService
         ];
     }
 
-    public function retrieveShopsByStoreOwner($userId, $floor = null)
+    public function retrieveShopsByStoreOwner($userId, $floor = null): array
     {
         $shops = $this->shopRepository->getStoresByStoreOwnerId($userId, $floor)->toArray();
 
@@ -59,7 +59,7 @@ class ShopService
         ]);
     }
 
-    public function retrieveAllStores($userId, $floor)
+    public function retrieveAllStores($userId, $floor): array
     {
         if($floor == null) {
             $shops = $this->shopRepository->all()->toArray();

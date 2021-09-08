@@ -53,16 +53,16 @@ class ShopController extends Controller
      */
     public function retrieveStoresForStoreOwner(ShopRetrieveRequest $request)
     {
-        if(Auth::user()->role == User::ROLES['store-owner'])
+        if(Auth::user()->role != User::ROLES['store-owner'])
         {
-            $result = $this->shopService->retrieveShopsByStoreOwner(Auth::user()->id, $request['floor'] ?? null);
-
-            return response($result, 201);
+            return response([
+                'message' => 'Your do not have the right role to do this task'
+            ], 401);
         }
 
-        return response([
-            'message' => 'Your do not have the right role to do this task'
-        ], 401);
+        $result = $this->shopService->retrieveShopsByStoreOwner(Auth::user()->id, $request['floor'] ?? null);
+
+        return response($result, 200);
     }
 
     /**
@@ -71,16 +71,16 @@ class ShopController extends Controller
     public function retrieveAllStoresForAdmin(ShopRetrieveRequest $request)
     {
         $validatedRequest = $request->validated();
-        if(Auth::user()->role == User::ROLES['super-admin'] || Auth::user()->role == User::ROLES['shop-manager'])
-        {
-            $result = $this->shopService->retrieveAllStores(Auth::user()->id, $validatedRequest['floor'] ?? null);
 
-            return response($result, 201);
+        if(Auth::user()->role != User::ROLES['super-admin'] && Auth::user()->role != User::ROLES['shop-manager']) {
+            return response([
+                'message' => 'Your do not have the right role to do this task'
+            ], 401);
         }
 
-        return response([
-            'message' => 'Your do not have the right role to do this task'
-        ], 401);
+        $result = $this->shopService->retrieveAllStores(Auth::user()->id, $validatedRequest['floor'] ?? null);
+
+        return response($result, 200);
     }
 
 }
