@@ -33,6 +33,8 @@
         }
     },
     "scripts": {
+        "db:fresh": "@php artisan migrate:fresh --seed",
+        "db:fresh-no-seed": "@php artisan migrate:fresh",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
@@ -45,6 +47,19 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "config:clear": "@php artisan config:clear",
+        "dev:init": [
+            "Composer\\Config::disableProcessTimeout",
+            "@composer install",
+            "@config:clear",
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php artisan key:generate --ansi"
+        ],
+        "fixture:dump": "mysqldump -uroot -hdb --complete-insert --ignore-table=shopmall.migrations -t shopmall > database/fixtures/shopmall_dev.sql",
+        "fixture:load": [
+            "@db:fresh-no-seed",
+            "mysql -uroot -hdb shopmall < ./database/fixtures/shopmall_dev.sql"
         ]
     },
     "extra": {
