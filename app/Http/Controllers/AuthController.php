@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AuthUserLoginRequest;
 use App\Http\Requests\AuthUserRegisterRequest;
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

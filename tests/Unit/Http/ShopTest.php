@@ -179,7 +179,7 @@ class ShopTest extends TestCase
             'id' => $shopToBeDelted->id,
         ];
 
-        $response = $this->actingAs($this->shopManager)->call('DELETE', 'api/shops/admin/delete', $requestForm);
+        $response = $this->actingAs($this->shopManager)->call('DELETE', 'api/shops/admin/destroy', $requestForm);
         $response->assertStatus(200);
     }
 
@@ -201,7 +201,7 @@ class ShopTest extends TestCase
             'id' => $shopToBeDelted->id,
         ];
 
-        $response = $this->actingAs($this->storeOwnerA)->call('DELETE', 'api/shops/admin/delete', $requestForm);
+        $response = $this->actingAs($this->storeOwnerA)->call('DELETE', 'api/shops/admin/destroy', $requestForm);
         $response->assertStatus(401);
     }
 

@@ -85,4 +85,84 @@ class UserTest extends TestCase
         $response = $this->actingAs($this->shopManager)->call('POST', 'api/register', $requestForm);
         $response->assertStatus(401);
     }
+
+    /**
+     * @test
+     */
+    public function deleteSuccess(): void
+    {
+        Session::start();
+
+        $userToDelete = User::factory()->create([
+            'role' => User::ROLES['store-owner'],
+        ]);
+
+        $requestForm = [
+            '_token' => csrf_token(),
+            'id' => $userToDelete->id,
+        ];
+
+        $response = $this->actingAs($this->superAdmin)->call('DELETE', 'api/admin/users/destroy', $requestForm);
+        $response->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function deleteFail(): void
+    {
+        Session::start();
+
+        $userToDelete = User::factory()->create([
+            'role' => User::ROLES['store-owner'],
+        ]);
+
+        $requestForm = [
+            '_token' => csrf_token(),
+            'id' => $userToDelete->id,
+        ];
+
+        $response = $this->actingAs($this->shopManager)->call('DELETE', 'api/admin/users/destroy', $requestForm);
+        $response->assertStatus(401);
+    }
+
+    /**
+     * @test
+     */
+    public function updateSuccess(): void
+    {
+        Session::start();
+
+        $requestForm = [
+            '_token' => csrf_token(),
+            'id' => $this->storeOwner->id,
+            'role' => User::ROLES['shop-manager'],
+            'name' => 'Updated Name',
+            'email' => 'newemails@yahoo.com',
+            'password' => '123123',
+        ];
+
+        $response = $this->actingAs($this->superAdmin)->call('PATCH', 'api/admin/users/update', $requestForm);
+        $response->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function updateFailed(): void
+    {
+        Session::start();
+
+        $requestForm = [
+            '_token' => csrf_token(),
+            'id' => $this->storeOwner->id,
+            'role' => User::ROLES['shop-manager'],
+            'name' => 'Updated Name',
+            'email' => 'newemails@yahoo.com',
+            'password' => '123123',
+        ];
+
+        $response = $this->actingAs($this->storeOwner)->call('PATCH', 'api/admin/users/update', $requestForm);
+        $response->assertStatus(401);
+    }
 }

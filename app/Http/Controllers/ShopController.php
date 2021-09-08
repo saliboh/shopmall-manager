@@ -49,7 +49,7 @@ class ShopController extends Controller
         return response($result, 200);
     }
 
-    public function delete(ShopDeleteRequest $request)
+    public function destroy(ShopDeleteRequest $request)
     {
         if($this->isNotAdmin()) {
             return response([

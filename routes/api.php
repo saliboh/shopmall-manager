@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,5 +34,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::post('/shops/admin/create', [ShopController::class, 'create']);
     Route::patch('/shops/admin/update', [ShopController::class, 'update']);
-    Route::delete('/shops/admin/delete', [ShopController::class, 'delete']);
+    Route::delete('/shops/admin/destroy', [ShopController::class, 'destroy']);
+
+    Route::delete('/admin/users/destroy', [UserController::class, 'destroy']);
+    Route::patch('/admin/users/update', [UserController::class, 'update']);
 });
