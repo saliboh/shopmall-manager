@@ -23,7 +23,7 @@ class UserTest extends TestCase
             'role' => User::ROLES['shop-manager'],
         ]);
 
-        $this->storeOwner= User::factory()->create([
+        $this->storeOwner = User::factory()->create([
             'role' => User::ROLES['store-owner'],
         ]);
     }
@@ -163,6 +163,27 @@ class UserTest extends TestCase
         ];
 
         $response = $this->actingAs($this->storeOwner)->call('PATCH', 'api/admin/users/update', $requestForm);
+        $response->assertStatus(401);
+    }
+
+    /**
+     * @test
+     */
+    public function editSuccess(): void
+    {
+        $response = $this->actingAs($this->superAdmin)->call('GET', 'api/admin/users/edit'.$this->storeOwner->id);
+        $response->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function editFail(): void
+    {
+        $response = $this->actingAs($this->storeOwner)->call('GET', 'api/admin/users/edit/'.$this->storeOwner->id);
+        $response->assertStatus(401);
+
+        $response = $this->actingAs($this->shopManager)->call('GET', 'api/admin/users/edit/'.$this->storeOwner->id);
         $response->assertStatus(401);
     }
 }
