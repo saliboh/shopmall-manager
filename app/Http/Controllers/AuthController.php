@@ -50,21 +50,23 @@ class AuthController extends Controller
         $user = User::where('email', $fields['email'])->first();
 
         // Check password
-        if(!$user || !Hash::check($fields['password'], $user->password)) {
-            return response([
-                'message' => 'Bad credentials'
-            ], 401);
-        }
+        // if(!$user || !Hash::check($fields['password'], $user->password)) {
+        //     return response([
+        //         'message' => 'Bad credentials'
+        //     ], 401);
+        // }
 
         if (Auth::attempt($fields)) {
             $success = true;
             $message = 'User login successfully';
+            $token = $user->createToken('myapptoken')->plainTextToken;
         } else {
             $success = false;
-            $message = 'Unauthorised';
+            $message = 'Bad Credentials';
+            $token = null;
         }
 
-        $token = $user->createToken('myapptoken')->plainTextToken;
+
 
         $response = [
             'user' => $user,
@@ -73,7 +75,7 @@ class AuthController extends Controller
             'message' => $message
         ];
 
-        return response($response,201);
+        return response()->json($response);
     }
 
     public function logout(Request $request) {

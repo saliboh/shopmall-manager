@@ -19684,7 +19684,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
     if (window.Laravel.isLoggedin) {
-      return next('users');
+      return next('/admin/users/index');
     }
 
     next();
@@ -20362,7 +20362,7 @@ var routes = [{
   component: _components_Shops_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
 }, {
   name: 'users',
-  path: '/users',
+  path: '/admin/users/index',
   component: _components_Users_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
 }, {
   name: 'adduser',
