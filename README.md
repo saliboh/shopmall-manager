@@ -93,3 +93,4 @@ Response Sample
 
 Links: Please refer to `routes/web.php` and `routes/api.php`
 Required POST/PATCH/DELETE/GET Data, Please refer to `app\Http\Requests` from its respective `Controllers`
+Requirement: Needs to retrieve token, from the Login API
