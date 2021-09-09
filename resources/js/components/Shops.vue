@@ -1,7 +1,7 @@
 <template>
     <div>
         <h4 class="text-center">All Shops on the Mall</h4><br/>
-        <a type="button" href="csv-export" class="btn btn-info mb-2">Export CSV</a>
+
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -22,8 +22,7 @@
                 <td>{{ shop.visit }}</td>
                 <td>
                     <div class="btn-group" role="group">
-
-                        <button class="btn btn-danger" @click="deleteShop(shop.id)">Delete</button>
+                        <button :disabled="isAdmin" class="btn btn-danger" @click="deleteShop(shop.id)">Delete</button>
                     </div>
                 </td>
             </tr>
@@ -37,7 +36,8 @@
 export default {
     data() {
         return {
-            shops: []
+            shops: [],
+            isAdmin: null
         }
     },
     created() {
@@ -45,10 +45,13 @@ export default {
             .then(response => {
                 let role = response.data.role;
                 let url = '/api/shops/admin/retrieve-stores';
+                this.isAdmin = false;
 
                 if(role == 'store-owner') {
                      url = '/api/shops/retrieve-stores';
+                     this.isAdmin = true;
                 }
+
                 console.log(role);
                 console.log(url);
                 this.$axios.post(url, '0')
