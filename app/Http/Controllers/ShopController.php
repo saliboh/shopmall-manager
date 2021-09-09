@@ -104,7 +104,7 @@ class ShopController extends Controller
 
         $result = $this->shopService->retrieveShopsByStoreOwner(Auth::user()->id, $request['floor'] ?? null);
 
-        return response($result, 200);
+        return response()->json($result, 200);
     }
 
     /**
@@ -115,14 +115,14 @@ class ShopController extends Controller
         $validatedRequest = $request->validated();
 
         if($this->isNotAdmin()) {
-            return response([
+            return response()->json([
                 'message' => 'Your do not have the right role to do this task'
             ], 401);
         }
 
         $result = $this->shopService->retrieveAllStores(Auth::user()->id, $validatedRequest['floor'] ?? null);
 
-        return response($result, 200);
+        return response()->json($result, 200);
     }
 
     private function isNotAdmin(): bool

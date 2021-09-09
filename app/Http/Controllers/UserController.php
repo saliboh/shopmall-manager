@@ -25,7 +25,7 @@ class UserController extends Controller
     {
         if (Auth::user()->role != 'super-admin')
         {
-            return response([
+            return response()->json([
                 'message' => 'Your role is not allowed to do this action'
             ], 401);
         }
@@ -105,5 +105,10 @@ class UserController extends Controller
         return response(
             $this->userService->delete($request->validated(), 200)
         );
+    }
+
+    public function requesterRole()
+    {
+        return response()->json(['role' => Auth::user()->role]);
     }
 }

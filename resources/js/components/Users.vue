@@ -1,6 +1,10 @@
 <template>
     <div>
         <h4 class="text-center">All Users</h4><br/>
+
+        <div class="alert alert-danger" role="alert" v-if="error !== null">
+            {{ error }}
+        </div>
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -28,7 +32,7 @@
             </tbody>
         </table>
 
-        <button type="button" class="btn btn-info" @click="this.$router.push('/users/add')">Add User</button>
+        <button type="button" class="btn btn-info" @click="this.$router.push({name: 'adduser'})">Add User</button>
     </div>
 </template>
 
@@ -36,18 +40,34 @@
 export default {
     data() {
         return {
-            users: []
+            users: [],
+            error: null
         }
     },
     created() {
-        this.$axios.get('/api/admin/users/index')
+         this.$axios.get('/api/admin/users/requester-role')
             .then(response => {
-                this.users = response.data;
-                console.log(this.users);
+                let role = response.data.role;
+
+                if(role != 'super-admin') {
+                    this.error = 'You do not have the permission';
+                } else {
+                    console.log(role);
+                    this.$axios.get('/api/admin/users/index')
+                        .then(response => {
+                            this.users = response.data;
+                            console.log(this.users);
+                        })
+                        .catch(function (error) {
+                            console.error(error);
+                            this.error = 'You do not have the permission';
+                        });
+                }
             })
             .catch(function (error) {
                 console.error(error);
             });
+
     },
     methods: {
         deleteUser(id) {

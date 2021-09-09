@@ -56,7 +56,7 @@ class ShopService
             'requester-user-id' => $userId,
             'requester-user-role' => Auth::user()->role,
             'total-stores' => count($shops),
-            'data' => $shops,
+            'shops' => $shops,
         ]);
     }
 
@@ -74,7 +74,7 @@ class ShopService
             'requester-user-id' => $userId,
             'requester-user-role' => Auth::user()->role,
             'total-stores' => count($shops),
-            'data' => $shops,
+            'shops' => $shops,
         ]);
     }
 

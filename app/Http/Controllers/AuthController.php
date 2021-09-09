@@ -40,7 +40,7 @@ class AuthController extends Controller
             'Role' => Auth::user()->role,
         ];
 
-        return response($response, 201);
+        return response()->json($response, 201);
     }
 
     public function login(AuthUserLoginRequest $request) {

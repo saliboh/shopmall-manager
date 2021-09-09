@@ -37,7 +37,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::delete('/shops/admin/destroy', [ShopController::class, 'destroy']);
 
     Route::get('/admin/users/index', [UserController::class, 'index']);
+    Route::post('/admin/users/create', [AuthController::class, 'register']);
     Route::get('/admin/users/edit/{id}', [UserController::class, 'edit']);
     Route::delete('/admin/users/destroy', [UserController::class, 'destroy']);
     Route::patch('/admin/users/update', [UserController::class, 'update']);
+    Route::get('/admin/users/requester-role', [UserController::class, 'requesterRole']);
 });
