@@ -54,15 +54,13 @@ export default {
     },
     methods: {
         updateUser() {
-
-                this.$axios.patch(`/api/admin/users/update`, this.user)
-                    .then(response => {
-                        this.$router.push({name: 'users'});
-                    })
-                    .catch(function (error) {
-                        console.error(error);
-                    });
-
+            this.$axios.patch(`/api/admin/users/update`, this.user)
+                .then(response => {
+                    this.$router.push({name: 'users'});
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
         }
     },
     beforeRouteEnter(to, from, next) {

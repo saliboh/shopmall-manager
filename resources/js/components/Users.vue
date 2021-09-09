@@ -40,29 +40,26 @@ export default {
         }
     },
     created() {
-        this.$axios.get('/sanctum/csrf-cookie').then(response => {
-            this.$axios.get('/api/admin/users/index')
+        this.$axios.get('/api/admin/users/index')
+            .then(response => {
+                this.users = response.data;
+                console.log(this.users);
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    },
+    methods: {
+        deleteUser(id) {
+            this.$axios.delete(`/api/admin/users/destroy`, { params: { id } })
                 .then(response => {
-                    this.users = response.data;
-                    console.log(this.users);
+                    // this.$router.push({name: 'users'});
+                    console.log(response);
+                    window.location.href = "/admin/users/index";
                 })
                 .catch(function (error) {
                     console.error(error);
                 });
-        })
-    },
-    methods: {
-        deleteUser(id) {
-            this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.delete(`/api/users/delete/${id}`)
-                    .then(response => {
-                        let i = this.users.map(item => item.id).indexOf(id); // find index of your object
-                        this.users.splice(i, 1)
-                    })
-                    .catch(function (error) {
-                        console.error(error);
-                    });
-            })
         }
     },
     beforeRouteEnter(to, from, next) {

@@ -19635,30 +19635,25 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
-      _this.$axios.get('/api/admin/users/index').then(function (response) {
-        _this.users = response.data;
-        console.log(_this.users);
-      })["catch"](function (error) {
-        console.error(error);
-      });
+    this.$axios.get('/api/admin/users/index').then(function (response) {
+      _this.users = response.data;
+      console.log(_this.users);
+    })["catch"](function (error) {
+      console.error(error);
     });
   },
   methods: {
     deleteUser: function deleteUser(id) {
-      var _this2 = this;
-
-      this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
-        _this2.$axios["delete"]("/api/users/delete/".concat(id)).then(function (response) {
-          var i = _this2.users.map(function (item) {
-            return item.id;
-          }).indexOf(id); // find index of your object
-
-
-          _this2.users.splice(i, 1);
-        })["catch"](function (error) {
-          console.error(error);
-        });
+      this.$axios["delete"]("/api/admin/users/destroy", {
+        params: {
+          id: id
+        }
+      }).then(function (response) {
+        // this.$router.push({name: 'users'});
+        console.log(response);
+        window.location.href = "/admin/users/index";
+      })["catch"](function (error) {
+        console.error(error);
       });
     }
   },
@@ -20552,11 +20547,11 @@ var routes = [{
   component: _components_Users_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
 }, {
   name: 'adduser',
-  path: '/users/add',
+  path: '/admin/users/create',
   component: _components_AddUser_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
 }, {
   name: 'edituser',
-  path: '/users/edit/:id',
+  path: '/admin/users/users/edit/:id',
   component: _components_EditUser_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
 }, {
   name: 'updateuser',

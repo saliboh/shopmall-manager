@@ -38,12 +38,12 @@ export const routes = [{
     },
     {
         name: 'adduser',
-        path: '/users/add',
+        path: '/admin/users/create',
         component: AddUser
     },
     {
         name: 'edituser',
-        path: '/users/edit/:id',
+        path: '/admin/users/users/edit/:id',
         component: EditUser
     },
     {
