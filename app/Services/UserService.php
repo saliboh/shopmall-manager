@@ -45,7 +45,7 @@ class UserService
 
         return [
             'update-status' => $user->save(),
-            'data' => $user,
+            'user' => $user,
         ];
     }
 

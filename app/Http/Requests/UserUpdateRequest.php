@@ -36,7 +36,7 @@ class UserUpdateRequest extends FormRequest
             'email' => [
                 'required',
                 'string',
-                'unique:users,email'
+                'unique:users,email,'.$this->id.',id',
             ],
             'password' => [
                 'required',

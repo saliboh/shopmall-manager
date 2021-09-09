@@ -46,15 +46,7 @@ class AuthController extends Controller
     public function login(AuthUserLoginRequest $request) {
         $fields = $request->validated();
 
-        // Check email
         $user = User::where('email', $fields['email'])->first();
-
-        // Check password
-        // if(!$user || !Hash::check($fields['password'], $user->password)) {
-        //     return response([
-        //         'message' => 'Bad credentials'
-        //     ], 401);
-        // }
 
         if (Auth::attempt($fields)) {
             $success = true;
@@ -65,8 +57,6 @@ class AuthController extends Controller
             $message = 'Bad Credentials';
             $token = null;
         }
-
-
 
         $response = [
             'user' => $user,

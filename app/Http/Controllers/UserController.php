@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserDeleteRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,7 @@ class UserController extends Controller
 
     public function index()
     {
-        if(Auth::user()->role != 'super-admin')
+        if (Auth::user()->role != 'super-admin')
         {
             return response([
                 'message' => 'Your role is not allowed to do this action'
@@ -32,12 +33,22 @@ class UserController extends Controller
         $users = $this->userService
             ->getAllExceptUserHavingThisId(Auth::user()->id);
 
-        $response = [
-            'data' => $users,
-        ];
+        return response()->json($users);
+    }
 
-        return response()->json($users, 200);
-        //return array_reverse($users);
+    public function edit($id)
+    {
+        if (Auth::user()->role != User::ROLES['super-admin'])
+        {
+            return response([
+                'message' => 'Your role is not allowed to do this action'
+            ], 401);
+        }
+
+        $users = User::find($id)->toArray();
+
+        return response()->json($users);
+
     }
 
     /**
@@ -60,16 +71,20 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request)
     {
-        if(Auth::user()->role != 'super-admin')
+        if (Auth::user()->role != 'super-admin')
         {
-            return response([
+            $response = [
                 'message' => 'Your role is not allowed to do this action'
-            ], 401);
+            ];
+
+            return response()->json($response, 401);
         }
 
-        return response(
-            $this->userService->update($request->validated(), 200)
-        );
+        $response = [
+            'result' => $this->userService->update($request->validated()),
+        ];
+
+        return response()->json($response);
     }
 
     /**
@@ -80,7 +95,7 @@ class UserController extends Controller
      */
     public function destroy(UserDeleteRequest $request)
     {
-        if(Auth::user()->role != 'super-admin')
+        if (Auth::user()->role != 'super-admin')
         {
             return response([
                 'message' => 'Your role is not allowed to do this action'
